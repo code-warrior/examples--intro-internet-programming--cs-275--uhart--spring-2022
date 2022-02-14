@@ -1,0 +1,9 @@
+/* Make the text color just a tinge lighter than true black */
+html {
+  color: #222;
+}
+
+/* Make the background color just a tad bit darker than white */
+body {
+  background-color: #ccc;
+}
