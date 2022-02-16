@@ -1,0 +1,21 @@
+body {
+  font-family: Roboto, sans-serif;
+}
+
+p:first-of-type {
+  font-weight: 100;
+}
+
+p:nth-child(2) {
+  font-weight: 500;
+}
+
+p:nth-child(3) {
+  font-weight: 100;
+  font-style: italic;
+}
+
+p:last-of-type {
+  font-weight: 500;
+  font-style: italic;
+}
