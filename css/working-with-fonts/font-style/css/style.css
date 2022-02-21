@@ -1,0 +1,33 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+p:nth-child(1) {
+  font-weight: var(--thin);
+  font-style: italic;
+}
+
+p:nth-child(2) {
+  font-weight: var(--light);
+  font-style: italic;
+}
+
+p:nth-child(3) {
+  font-weight: var(--regular);
+  font-style: italic;
+}
+
+p:nth-child(4) {
+  font-weight: var(--medium);
+  font-style: italic;
+}
+
+p:nth-child(5) {
+  font-weight: var(--bold);
+  font-style: italic;
+}
+
+p:nth-child(6) {
+  font-weight: var(--black);
+  font-style: italic;
+}
