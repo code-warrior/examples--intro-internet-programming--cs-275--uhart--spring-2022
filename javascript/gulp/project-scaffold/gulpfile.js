@@ -19,7 +19,7 @@ let validateHTML = () => {
 };
 
 let lintJS = () => {
-    return src(`dev/scripts/*.js`)
+    return src(`dev/scripts/**/*.js`)
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach(`compact`));
 };
