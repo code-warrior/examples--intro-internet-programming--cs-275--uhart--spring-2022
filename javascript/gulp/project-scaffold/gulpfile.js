@@ -96,7 +96,6 @@ let serve = () => {
         .on(`change`, reload);
 
     watch(`dev/scripts/*.js`, lintJS)
-    // watch(`dev/scripts/*.js`, series(lintJS, transpileJSForDev))
         .on(`change`, reload);
 };
 
