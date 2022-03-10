@@ -1,4 +1,5 @@
 const { src, dest, series, watch } = require(`gulp`),
+    del = require(`del`),
     htmlCompressor = require(`gulp-htmlmin`),
     htmlValidator = require(`gulp-html`),
     CSSLinter = require(`gulp-stylelint`),
