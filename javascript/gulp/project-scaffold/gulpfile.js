@@ -65,7 +65,7 @@ async function clean() {
 }
 
 let lintCSS = () => {
-    return src(`dev/styles/css/**/*.css`)
+    return src(`dev/css/**/*.css`)
         .pipe(CSSLinter({
             failAfterError: false,
             reporters: [
