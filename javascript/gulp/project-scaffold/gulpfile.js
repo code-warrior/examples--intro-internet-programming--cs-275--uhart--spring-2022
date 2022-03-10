@@ -89,13 +89,13 @@ let serve = () => {
         }
     });
 
-    watch(`dev/html/*.html`, validateHTML)
+    watch(`dev/html/**/*.html`, validateHTML)
         .on(`change`, reload);
 
     watch(`dev/css/**/*.css`, lintCSS)
         .on(`change`, reload);
 
-    watch(`dev/scripts/*.js`, lintJS)
+    watch(`dev/scripts/**/*.js`, lintJS)
         .on(`change`, reload);
 };
 
