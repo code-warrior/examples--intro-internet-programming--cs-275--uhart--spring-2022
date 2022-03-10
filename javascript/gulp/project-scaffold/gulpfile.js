@@ -79,7 +79,7 @@ let lintCSS = () => {
 let serve = () => {
     browserSync({
         notify: true,
-        reloadDelay: 200,
+        reloadDelay: 100,
         server: {
             baseDir: [
                 `temp`,
