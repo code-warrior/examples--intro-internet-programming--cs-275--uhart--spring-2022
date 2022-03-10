@@ -1,7 +1,4 @@
 window.onload = () => {
-    const CSSPreProcessor = `Sass`;
-    const JSVersion = `ES6`;
-
     let body = document.querySelector(`body`);
     let paragraph = document.createElement(`p`);
     let text = document.createTextNode(`If you can see this content in blue with ` +
