@@ -7,21 +7,54 @@ const { src, dest, series, watch } = require(`gulp`),
     browserSync = require(`browser-sync`),
     reload = browserSync.reload;
 
+let validateHTML = () => {
+    return src(`dev/html/**/*.html`)
+        .pipe(htmlValidator(undefined));
+};
+
 let compressHTML = () => {
     return src(`dev/html/**/*.html`)
         .pipe(htmlCompressor({collapseWhitespace: true}))
         .pipe(dest(`prod`));
 };
 
-let validateHTML = () => {
-    return src(`dev/html/**/*.html`)
-        .pipe(htmlValidator(undefined));
+let lintCSS = () => {
+    return src(`dev/css/**/*.css`)
+        .pipe(CSSLinter({
+            failAfterError: false,
+            reporters: [
+                {formatter: `string`, console: true}
+            ]
+        }));
 };
 
 let lintJS = () => {
     return src(`dev/scripts/**/*.js`)
         .pipe(jsLinter())
         .pipe(jsLinter.formatEach(`compact`));
+};
+
+let serve = () => {
+    browserSync({
+        notify: true,
+        reloadDelay: 100,
+        server: {
+            baseDir: [
+                `temp`,
+                `dev`,
+                `dev/html`
+            ]
+        }
+    });
+
+    watch(`dev/html/**/*.html`, validateHTML)
+        .on(`change`, reload);
+
+    watch(`dev/css/**/*.css`, lintCSS)
+        .on(`change`, reload);
+
+    watch(`dev/scripts/**/*.js`, lintJS)
+        .on(`change`, reload);
 };
 
 async function listTasks() {
@@ -64,48 +97,15 @@ async function clean() {
     process.stdout.write(`\n`);
 }
 
-let lintCSS = () => {
-    return src(`dev/css/**/*.css`)
-        .pipe(CSSLinter({
-            failAfterError: false,
-            reporters: [
-                {formatter: `string`, console: true}
-            ]
-        }));
-};
-
-let serve = () => {
-    browserSync({
-        notify: true,
-        reloadDelay: 100,
-        server: {
-            baseDir: [
-                `temp`,
-                `dev`,
-                `dev/html`
-            ]
-        }
-    });
-
-    watch(`dev/html/**/*.html`, validateHTML)
-        .on(`change`, reload);
-
-    watch(`dev/css/**/*.css`, lintCSS)
-        .on(`change`, reload);
-
-    watch(`dev/scripts/**/*.js`, lintJS)
-        .on(`change`, reload);
-};
-
+exports.validateHTML = validateHTML;
+exports.compressHTML = compressHTML;
+exports.lintCSS = lintCSS;
+exports.lintJS = lintJS;
 exports.serve = series(
     validateHTML,
     lintCSS,
     lintJS,
     serve
 );
-exports.compressHTML = compressHTML;
-exports.validateHTML = validateHTML;
-exports.lintCSS = lintCSS;
-exports.lintJS = lintJS;
 exports.default = listTasks;
 exports.clean = clean;
